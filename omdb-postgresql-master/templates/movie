@@ -1,0 +1,148 @@
+<ul>
+[% IF movie.date %]<li>Date: <a href="../date/$movie.date">$movie.date</a></li>[% END %]
+[% IF movie.runtime %]<li>Runtime: ${movie.runtime} min</li>[% END %]
+[% IF movie.budget %]<li>Budget: $movie.budget</li>[% END %]
+[% IF movie.revenue %]<li>Revenue: $movie.revenue</li>[% END %]
+[% IF movie.homepage %]<li>Homepage: <a href="$movie.homepage">$movie.homepage</a></li>[% END %]
+[% IF movie.vote_average %]<li>Votes: $movie.vote_average ($movie.votes_count votes)</li>[% END %]
+[% IF series %]<li>Part of series: <a href="$series.id-$series.name">$series.name</a></li> [% END %]
+[% IF parent %]<li>Parent: <a href="$parent.id-$parent.name">$parent.name</a> ($parent.kind)</li> [% END %]
+[% IF countries.0 %]
+<li>Countries:
+[% FOR r IN countries %]<a href="../country/$r">$r</a>[% INCLUDE comma %][% END %]
+</li>
+[% END %]
+[% IF languages.0 %]
+<li>Languages:
+[% FOR r IN languages %]<a href="../language/$r">$r</a>[% INCLUDE comma %][% END %]
+</li>
+[% END %]
+[% IF aliases.0 %]
+  <li>Other titles:
+  [% FOR a IN aliases %]
+  <em>$a.name</em> ($a.language[% IF a.official_translation %], official[% END %])[% INCLUDE comma %]
+  [% END %]
+  </li>
+[% END %]
+</ul>
+
+[% IF abstract_de %]
+<p><b>Beschreibung</b>: <em>$abstract_de.abstract</em></p>
+[% END %]
+
+[% IF abstract_en %]
+<p><b>Description</b>: <em>$abstract_en.abstract</em></p>
+[% END %]
+
+[% IF abstract_fr %]
+<p><b>Description</b>: <em>$abstract_fr.abstract</em></p>
+[% END %]
+
+[% IF abstract_es %]
+<p><b>Descripción</b>: <em>$abstract_es.abstract</em></p>
+[% END %]
+
+[% IF child_movies.0 %]
+Child movies:
+<ul>
+[% FOR m IN child_movies %]
+<li>[% INCLUDE movie %]</li>
+[% END %]
+</ul>
+[% END %]
+
+[% IF episodes.0 %]
+Episodes:
+<ul>
+[% FOR m IN episodes %]
+<li>[% INCLUDE movie %]</li>
+[% END %]
+</ul>
+[% END %]
+
+[% IF images.0 %]
+Images:
+<ul>
+[% FOR i IN images %]
+<li><a href="$i.source">$i.source</a> [% IF i.author %]($i.author)[% END %]</li>
+[% END %]
+</ul>
+[% END %]
+
+[% IF trailers.0 %]
+Trailers:
+<ul>
+[% FOR r IN trailers %]
+<li><a href="https://www.youtube.com/watch?v=$r.key">$r.key</a> ($r.language)</li>
+[% END %]
+</ul>
+[% END %]
+
+[% IF cast.0 %]
+Cast:
+<ul>
+[% FOR c IN cast %]
+<li><a href="../person/$c.person_id-$c.person_name">$c.person_name</a>
+  [% IF c.role %]as <em><a href="../character/$c.role">$c.role</a></em>[% END %]
+  (<a href="../job/$c.id-$c.job_name">$c.job_name</a>)</li>
+[% END %]
+</ul>
+[% END %]
+
+[% IF references_to.0 OR references_from.0 %]
+References:
+<ul>
+[% FOR r IN references_to %]
+<li>This title is a $r.type of <a href="$r.referenced_id-$r.name">$r.name</a> ($r.date)</li>
+[% END %]
+[% FOR r IN references_from %]
+<li><a href="$r.movie_id-$r.name">$r.name</a> ($r.date) is a $r.type of this title</li>
+[% END %]
+</ul>
+[% END %]
+
+[% IF links.0 %]
+Links:
+<ul>
+[% FOR r IN links %]
+<li>
+  [% IF r.source == "amazon" %]
+    <a href="https://www.amazon.de/s/ref=nb_sb_noss?field-keywords=$r.key">Amazon: $r.key</a> ($r.language)
+  [% ELSIF r.source == "imdbmovie" OR r.source == "imdbepisode" %]
+    <a href="https://www.imdb.com/title/$r.key/">IMDB: $r.key</a>
+  [% ELSIF r.source == "wikidata" %]
+    <a href="https://www.wikidata.org/wiki/$r.key">Wikidata: $r.key</a>
+  [% ELSIF r.source == "wikipedia" %]
+    <a href="https://${r.language}.wikipedia.org/wiki/$r.key">Wikipedia: $r.key</a> ($r.language)
+  [% ELSE %]
+    $r.source: $r.key ($r.language)
+  [% END %]
+</li>
+[% END %]
+</ul>
+[% END %]
+
+[% IF categories.0 %]
+Categories:
+<p>
+[% FOR c IN categories %]
+&middot; <a href="../category/$c.id-$c.name">$c.name</a>
+[% END %]
+&middot; </p>
+[% END %]
+
+[% IF keywords.0 %]
+Keywords:
+<p>
+[% FOR c IN keywords %]
+&middot; <a href="../category/$c.id-$c.name">$c.name</a>
+[% END %]
+&middot; </p>
+[% END %]
+
+Movies with similar name:
+<ul>
+[% FOR m IN similar %]
+<li>[% INCLUDE movie %]</li>
+[% END %]
+</ul>

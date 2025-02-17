@@ -1,0 +1,6 @@
+Movies in this language:
+<ul>
+[% FOR m IN movies %]
+<li>[% INCLUDE movie %]</li>
+[% END %]
+</ul>
