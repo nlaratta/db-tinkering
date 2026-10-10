@@ -1,0 +1,6 @@
+# Database snapshot (published as a release asset, see scripts/restore.sh)
+*.dump
+# Tableau autosave/lock files
+~*.twbr
+*.twbr
+.DS_Store

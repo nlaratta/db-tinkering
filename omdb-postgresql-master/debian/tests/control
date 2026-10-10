@@ -1,5 +1,0 @@
-Depends:
- postgresql,
- @,
-Tests: pg-restore
-Restrictions: allow-stderr
