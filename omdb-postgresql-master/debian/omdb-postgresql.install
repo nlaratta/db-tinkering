@@ -1,2 +1,0 @@
-omdb.dump /usr/share/omdb-postgresql
-pgbench /usr/share/omdb-postgresql

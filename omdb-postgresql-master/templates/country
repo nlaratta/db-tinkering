@@ -1,6 +1,0 @@
-Movies from this country:
-<ul>
-[% FOR m IN movies %]
-<li>[% INCLUDE movie %]</li>
-[% END %]
-</ul>
